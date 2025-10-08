@@ -1,8 +1,9 @@
-import json 
+# importae biblioteccas para guardar datos
+import json  
 import os 
-
+#definiendo lista global
 transacciones = []
-
+#definir funcion para cargar los datos
 def cargarD():
     global transacciones 
     if os.path.exists("gastos_familiares.json"): 
@@ -10,25 +11,25 @@ def cargarD():
             transacciones = json.load(archivo) 
     else:
         pass
-
+#definir funcion para que el usuario ingrese datos
 def agregarIng():
     try:
         cantidad = float(input("Ingresa la cantidad del ingreso: $"))
         descripcion = input("Ingresa una descripción para el ingreso: ")
         transaccion = {
             "tipo": "ingreso",
-            "cantidad": cantidad,
+            "cantidad": cantidad, #definir un  diccionario transaccion para guardar los datos que se ingresen 
             "descripcion": descripcion
         }
         transacciones.append(transaccion)
         print(f" Ingreso de ${cantidad:.2f} añadido correctamente")
     except ValueError:
         print(" Por favor, ingresa una cantidad numérica válida")
-
+#definir funcion para agregar gastos
 def agregar_gasto():
     print("\n--- Categorías de Gastos ---") 
     categorias = ["Alimentos", "Transporte", "Vivienda", "Entretenimiento", "Otros"]
-    for i, cat in enumerate(categorias, 1):
+    for i, cat in enumerate(categorias, 1): #enumerate recorre todo el diccionario de categorias
         print(f"{i}. {cat}")
     
     try: 
@@ -44,14 +45,14 @@ def agregar_gasto():
                 "descripcion": descripcion,
                 "categoria": categoria_elegida
             }
-            transacciones.append(transaccion)
+            transacciones.append(transaccion) #añadiendo el diccionario a la lista global
             print(f" Gasto de ${cantidad:.2f} en '{categoria_elegida}' añadido")
         else:
             print(" Opción de categoría no válida")
-    except (ValueError, IndexError):
+    except (ValueError, IndexError): #usando exceps para manejar errores
         print(" Entrada no válida. Asegúrate de ingresar un gasto real")
 
-def mostrarR():    
+def mostrarR():    #creando funcion para mostrar y calcular el balance final
     ingresosT = 0.0
     gastosDC = {
         "Alimentos": 0.0,
@@ -59,7 +60,7 @@ def mostrarR():
         "Vivienda": 0.0,
         "Entretenimiento": 0.0,
         "Otros": 0.0
-    }
+    }                                    
 
     for t in transacciones:
         if t["tipo"] == "ingreso":
@@ -68,7 +69,7 @@ def mostrarR():
             categoria = t["categoria"]
             gastosDC[categoria] += t["cantidad"]
 
-    gastos_totales = sum(gastosDC.values()) 
+    gastos_totales = sum(gastosDC.values())  #Se calcula el balance
     
     print("\n--- Resumen de Gastos ---")
     for categoria, total in gastosDC.items():
@@ -87,7 +88,7 @@ def mostrarR():
     else:
         print("Tus ingresos y gastos están equilibrados ")
 
-def main_menu():
+def main_menu(): #funcion principal que hace funcionar a todo el programa
     cargarD()
     while True:
         print("\n=== MENÚ PRINCIPAL ===")
@@ -102,17 +103,17 @@ def main_menu():
             agregarIng() 
         elif opcion == "2":
             agregar_gasto()
-        elif opcion == "3":
+        elif opcion == "3":               #se usan if elif y esle para ejecutar la funcion que se elija
             mostrarR()
         elif opcion == "4":
             guardarD()
             break
         else:
             print("Opción no válida. Por favor, elige un número del 1 al 4")
-
+# fucnion para guardar los datos
 def guardarD():
     with open("gastos_familiares.json", "w") as archivo:
         json.dump(transacciones, archivo, indent=4)
 
 if __name__ == "__main__":
-    main_menu()
+    main_menu() #se ejecuta el script
