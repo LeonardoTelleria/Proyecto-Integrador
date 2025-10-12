@@ -1,4 +1,4 @@
-# importae biblioteccas para guardar datos
+# importar biblioteccas para guardar datos
 import json  
 import os 
 #definiendo lista global
