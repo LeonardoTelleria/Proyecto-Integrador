@@ -10,5 +10,10 @@
         "cantidad": 124.0,
         "descripcion": "hola",
         "categoria": "Vivienda"
+    },
+    {
+        "tipo": "ingreso",
+        "cantidad": 34.0,
+        "descripcion": "trabajo"
     }
 ]

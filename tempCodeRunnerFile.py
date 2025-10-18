@@ -91,49 +91,38 @@ def mostrarR():    #creando funcion para mostrar y calcular el balance final
 
 def menu(): #funcion principal que hace funcionar a todo el programa
     cargarD()
-    usuario_logueado = False
-    while not usuario_logueado:
-        print("FinZen")
-        print("1. Iniciar Sesión")
-        print("2. Registrarse")
-        print("3. Salir")
-        opcionLogin = input("Elige una opción: ")
-    
-        if opcionLogin == "1":
-            if iniciar_sesion():
-                usuario_logueado = True
-            else:
-                print("No se pudo inicar sesion. vuelve a intentarlo")
-        elif opcionLogin == "2":
-            registrar_usuario()
-            print("\n  Volviendo...")
-        elif opcionLogin == "3":
-            print("saliendo del programa")
+    print("FinZen")
+    print("1. Iniciar Sesión")
+    print("2. Registrarse")
+    opcionLogin = input("Elige una opción: ")
+    if opcionLogin == "1":
+        if not iniciar_sesion():
+            print("No se pudo inicar sesion. Cerrando...")
             return
+
+        if opcionLogin == "2":
+            registrar_usuario()
+
+    while True:
+        print("\n=== MENÚ PRINCIPAL ===")
+        print("1. Agregar un nuevo ingreso")
+        print("2. Agregar un nuevo gasto")
+        print("3. Ver resumen y balance")
+        print("4. Salir del programa")
+        
+        opcion = input("Elige una opción (1-4): ")
+        
+        if opcion == "1":
+            agregarIng() 
+        elif opcion == "2":
+            agregar_gasto()
+        elif opcion == "3":               #se usan if elif y esle para ejecutar la funcion que se elija
+            mostrarR()
+        elif opcion == "4":
+            guardarD()
+            break
         else:
-            print("Opcion no valida. elige correctamente")
-        if usuario_logueado:
-            while True:
-                print("\n=== MENÚ PRINCIPAL ===")
-                print("1. Agregar un nuevo ingreso")
-                print("2. Agregar un nuevo gasto")
-                print("3. Ver resumen y balance")
-                print("4. Salir del programa")
-        
-                opcion = input("Elige una opción (1-4): ")
-        
-                if opcion == "1":
-                    agregarIng() 
-                elif opcion == "2":
-                    agregar_gasto()
-                elif opcion == "3":               #se usan if elif y esle para ejecutar la funcion que se elija
-                    mostrarR()
-                elif opcion == "4":
-                    guardarD()
-                    print("Saliendo...")
-                    break
-                else:
-                    print("Opción no válida. Por favor, elige un número del 1 al 4")
+            print("Opción no válida. Por favor, elige un número del 1 al 4")
 
 # fucnion para guardar los datos
 def guardarD():
