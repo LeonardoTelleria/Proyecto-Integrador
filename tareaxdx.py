@@ -92,7 +92,7 @@ def mostrarR():    #creando funcion para mostrar y calcular el balance final
 def menu(): #funcion principal que hace funcionar a todo el programa
     cargarD()
     usuario_logueado = False
-    while not usuario_logueado:
+    while not usuario_logueado: #haciendo menu para el login
         print("FinZen")
         print("1. Iniciar Sesión")
         print("2. Registrarse")
@@ -116,7 +116,7 @@ def menu(): #funcion principal que hace funcionar a todo el programa
             while True:
                 print("\n=== MENÚ PRINCIPAL ===")
                 print("1. Agregar un nuevo ingreso")
-                print("2. Agregar un nuevo gasto")
+                print("2. Agregar un nuevo gasto") #una vez logueado se manda el menu principal
                 print("3. Ver resumen y balance")
                 print("4. Salir del programa")
         
@@ -126,7 +126,7 @@ def menu(): #funcion principal que hace funcionar a todo el programa
                     agregarIng() 
                 elif opcion == "2":
                     agregar_gasto()
-                elif opcion == "3":               #se usan if elif y esle para ejecutar la funcion que se elija
+                elif opcion == "3":               #se usan if elif y else para ejecutar la funcion que se elija
                     mostrarR()
                 elif opcion == "4":
                     guardarD()
